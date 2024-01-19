@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class Agenda {
 
-    private ArrayList<Contacto> agenda = new ArrayList<>();
-    private Scanner scanner = new Scanner(System.in);
+    private final ArrayList<Contacto> agenda = new ArrayList<>();
+    private final Scanner scanner = new Scanner(System.in);
 
     public void menu() {
         int opcion;
@@ -18,26 +18,22 @@ public class Agenda {
 
             switch (opcion) {
                 case 1:
-                    borrarConsola();
                     System.out.println("1: Todos los contactos.\n");
                     printAllContactos();
                     break;
                 case 2:
-                    borrarConsola();
+                    System.out.println("2: Agregar contacto.");
                     agregarContacto();
                     break;
                 case 3:
-                    borrarConsola();
                     System.out.println("3: Buscar contacto.");
                     buscarContacto();
                     break;
                 case 4:
-                    borrarConsola();
                     System.out.println("4: Actualizar contacto.");
                     actualizarContacto();
                     break;
                 case 5:
-                    borrarConsola();
                     System.out.println("5: Eliminar contacto.");
                     eliminarContacto();
                     break;
@@ -81,13 +77,11 @@ public class Agenda {
     }
 
     private void agregarContacto() {
-        scanner.nextLine(); // Consumir el salto de línea pendiente
+        scanner.nextLine();
         String nombre;
         String numero;
 
         do {
-            borrarConsola();
-            System.out.println("2: Agregar contacto.");
             System.out.print("Ingrese el nombre del Contacto: ");
             nombre = validarNombre(scanner.nextLine());
             System.out.print("Ingrese el número del Contacto: ");
@@ -138,8 +132,7 @@ public class Agenda {
     }
 
     private int validarOpcion() {
-        int opc = 0;
-
+        int opc;
         while (true) {
             try {
                 opc = scanner.nextInt();
@@ -150,15 +143,15 @@ public class Agenda {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Error: Ingrese un número entero.");
-                scanner.nextLine(); // Limpiar el buffer de entrada
+                scanner.nextLine();
             }
         }
     }
 
     private void buscarContacto() {
-        scanner.nextLine(); // Consumir el salto de línea pendiente
+        scanner.nextLine();
         System.out.print("Ingrese el término de búsqueda: ");
-        String terminoBusqueda = scanner.nextLine().toLowerCase(); // Convertir a minúsculas para hacer la búsqueda no sensible a mayúsculas/minúsculas
+        String terminoBusqueda = scanner.nextLine().toLowerCase();
 
         int coincidencias = 0;
 
@@ -174,24 +167,23 @@ public class Agenda {
             System.out.println("Lista de coincidencias:");
             for (Contacto contacto : agenda) {
                 if (contacto.getNombre().toLowerCase().contains(terminoBusqueda)) {
-                    System.out.println(contacto.toString());
-                    System.out.println("-----------------------------");
+                    System.out.println(contacto);
                 }
             }
+            System.out.println("-----------------------------");
         } else {
             System.out.println("No se encontraron coincidencias parciales para el término de búsqueda: " + terminoBusqueda);
         }
 
         System.out.println("Presione Enter para continuar...");
-        scanner.nextLine(); // Esperar a que el usuario presione Enter
+        scanner.nextLine();
         borrarConsola();
     }
 
     private void actualizarContacto() {
-        scanner.nextLine(); // Consumir el salto de línea pendiente
-        System.out.println("4: Actualizar contacto.");
+        scanner.nextLine();
         System.out.print("Ingrese el nombre del contacto a actualizar: ");
-        String nombreActualizar = scanner.nextLine().toLowerCase(); // Convertir a minúsculas para hacer la búsqueda no sensible a mayúsculas/minúsculas
+        String nombreActualizar = scanner.nextLine().toLowerCase();
 
         boolean contactoEncontrado = false;
 
@@ -200,7 +192,7 @@ public class Agenda {
                 contactoEncontrado = true;
                 System.out.println("Contacto encontrado. Ingrese los nuevos datos:");
 
-                // Puedes agregar lógica para actualizar los datos del contacto
+
                 System.out.print("Nuevo nombre: ");
                 String nuevoNombre = validarNombre(scanner.nextLine());
                 System.out.print("Nuevo número: ");
@@ -219,15 +211,14 @@ public class Agenda {
         }
 
         System.out.println("Presione Enter para continuar...");
-        scanner.nextLine(); // Esperar a que el usuario presione Enter
+        scanner.nextLine();
         borrarConsola();
     }
 
     private void eliminarContacto() {
-        scanner.nextLine(); // Consumir el salto de línea pendiente
-        System.out.println("5: Eliminar contacto.");
+        scanner.nextLine();
         System.out.print("Ingrese el nombre del contacto a eliminar: ");
-        String nombreEliminar = scanner.nextLine().toLowerCase(); // Convertir a minúsculas para hacer la búsqueda no sensible a mayúsculas/minúsculas
+        String nombreEliminar = scanner.nextLine().toLowerCase();
 
         boolean contactoEncontrado = false;
 
@@ -237,7 +228,7 @@ public class Agenda {
                 System.out.println("Contacto encontrado. ¿Está seguro de que desea eliminar este contacto? (Sí/No): ");
                 String respuesta = scanner.nextLine();
 
-                if (respuesta.equalsIgnoreCase("Sí")) {
+                if (respuesta.equalsIgnoreCase("Si")) {
                     agenda.remove(contacto);
                     System.out.println("Contacto eliminado correctamente.");
                 } else {
@@ -253,7 +244,7 @@ public class Agenda {
         }
 
         System.out.println("Presione Enter para continuar...");
-        scanner.nextLine(); // Esperar a que el usuario presione Enter
+        scanner.nextLine();
         borrarConsola();
     }
 

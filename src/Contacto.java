@@ -7,11 +7,6 @@ public class Contacto {
     public Contacto() {
     }
 
-    public Contacto(String nombre, String numero) {
-        Nombre = nombre;
-        this.numero = numero;
-    }
-
     public String getNombre() {
         return Nombre;
     }
